@@ -1,12 +1,32 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
+import { EthersService } from './services/ethers.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [HomeComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'translucent-upgradeable-proxy';
+  title = 'Translucent Upgradeable Proxy';
+
+  userAddress: string | null = null;
+
+  constructor(private ethersService: EthersService) {
+    this.ethersService.connectedWalletAddress$.subscribe((address) => {
+      this.userAddress = address;
+    });
+  }
+
+  sliceAddress(): string {
+    if (!this.userAddress) {
+      return 'Connect Wallet';
+    }
+
+    return `${this.userAddress.slice(0, 6)} ... ${this.userAddress.slice(-4)}`;
+  }
+
+  async connectWallet() {
+    await this.ethersService.connectDisconnectWallet();
+  }
 }

@@ -10,7 +10,7 @@
         "owner": "typescript",
         "pattern": "$tsc",
         "background": {
-          "activeOnStart": true,
+          "activeOnStart": false,
           "beginsPattern": {
             "regexp": "(.*?)"
           },

@@ -1,0 +1,157 @@
+<div
+  class="flex flex-col gap-5 rounded-lg border-2 border-black mx-auto w-2/3 h-auto py-8 px-4"
+>
+  <h1
+    class="text-6xl leading-tight font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-purple-400 bg-clip-text text-transparent mb-4"
+  >
+    Translucent Upgradeability Proxy
+  </h1>
+  <div
+    *ngIf="walletConnected === ConnectionStatus.User"
+    class="flex gap-32 p-0 items-center justify-center"
+  >
+    <div class="flex flex-col gap-2 justify-center items-center">
+      <div
+        *ngIf="
+          currentImplementationAddress ===
+            ImplementationContractAddress.ImplementationV1 ||
+          currentImplementationAddress ===
+            ImplementationContractAddress.ImplementationV2 ||
+          currentImplementationAddress ===
+            ImplementationContractAddress.ImplementationV3
+        "
+        class="flex gap-5"
+      >
+        <div class="flex gap-2 items-center">
+          <input
+            class="text-center text-5xl bg-blue-200 rounded-lg py-8 px-2 w-[200px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none"
+            id="num1"
+            type="number"
+            [(ngModel)]="num1Sum"
+          />
+          <span class="text-5xl w-10 text-center text-blue-200">+</span>
+          <input
+            class="text-center text-5xl bg-blue-200 rounded-lg py-8 px-2 w-[200px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none"
+            id="num2"
+            type="number"
+            [(ngModel)]="num2Sum"
+          />
+        </div>
+        <button
+          class="flex-auto text-5xl w-[150px] bg-yellow-500 rounded-lg"
+          (click)="sum()"
+        >
+          =
+        </button>
+      </div>
+      <div
+        *ngIf="
+          currentImplementationAddress ===
+            ImplementationContractAddress.ImplementationV2 ||
+          currentImplementationAddress ===
+            ImplementationContractAddress.ImplementationV3
+        "
+        class="flex gap-5"
+      >
+        <div class="flex gap-2 items-center">
+          <input
+            class="text-center text-5xl bg-blue-200 rounded-lg py-8 px-2 w-[200px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none"
+            id="num1"
+            type="number"
+            [(ngModel)]="num1Mul"
+          />
+          <span class="text-5xl w-10 text-center text-blue-200">x</span>
+          <input
+            class="text-center text-5xl bg-blue-200 rounded-lg py-8 px-2 w-[200px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none"
+            id="num2"
+            type="number"
+            [(ngModel)]="num2Mul"
+          />
+        </div>
+        <button
+          class="flex-auto text-5xl w-[150px] bg-yellow-500 rounded-lg"
+          (click)="multiply()"
+        >
+          =
+        </button>
+      </div>
+      <div
+        *ngIf="
+          currentImplementationAddress ===
+          ImplementationContractAddress.ImplementationV3
+        "
+        class="flex gap-5"
+      >
+        <div class="flex gap-2 items-center">
+          <input
+            class="text-center text-5xl bg-blue-200 rounded-lg py-8 px-2 w-[200px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none"
+            id="num1"
+            type="number"
+            [(ngModel)]="num1Sub"
+          />
+          <span class="text-5xl w-10 text-center text-blue-200">-</span>
+          <input
+            class="text-center text-5xl bg-blue-200 rounded-lg py-8 px-2 w-[200px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-none"
+            id="num2"
+            type="number"
+            [(ngModel)]="num2Sub"
+          />
+        </div>
+        <button
+          class="flex-auto text-5xl w-[150px] bg-yellow-500 rounded-lg"
+          (click)="subtract()"
+        >
+          =
+        </button>
+      </div>
+    </div>
+
+    <span class="text-9xl text-white text-center min-w-[360px]">{{
+      totalValue ?? 0
+    }}</span>
+  </div>
+
+  <div
+    *ngIf="walletConnected === ConnectionStatus.Admin"
+    class="flex flex-col gap-5 items-center justify-center"
+  >
+    <h2 class="text-5xl text-center text-white">
+      Current Implementation Version:
+      {{
+        currentImplementationAddress ===
+        ImplementationContractAddress.ImplementationV1
+          ? "1"
+          : currentImplementationAddress ===
+            ImplementationContractAddress.ImplementationV2
+          ? "2"
+          : "3"
+      }}
+    </h2>
+    <form
+      class="flex gap-5 items-center justify-center text-5xl"
+      [formGroup]="formGroup"
+      (ngSubmit)="onSubmit()"
+    >
+      <select id="dropdown" formControlName="dropdown">
+        <option value="">Select Implementation</option>
+        <option *ngFor="let option of options" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <button
+        class="text-5xl p-4 bg-yellow-500 rounded-lg"
+        type="submit"
+        [disabled]="formGroup.invalid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+
+  <div
+    *ngIf="walletConnected === ConnectionStatus.Disconnected"
+    class="text-5xl text-center text-white"
+  >
+    Connect your wallet
+  </div>
+</div>
