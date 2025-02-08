@@ -1,14 +1,14 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { BrowserProvider, Signer, Contract, TransactionResponse } from 'ethers';
 import {
-  BehaviorSubject,
-  combineLatest,
-  pairwise,
-  Subject,
-  Subscription,
-} from 'rxjs';
+  BrowserProvider,
+  Signer,
+  Contract,
+  TransactionResponse,
+  ethers,
+} from 'ethers';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { ImplementationContractAddress } from '../components/home/home.component';
-import { InterfaceAbi } from 'ethers';
+import { InterfaceAbi, toUtf8Bytes } from 'ethers';
 
 @Injectable({
   providedIn: 'root',
@@ -523,6 +523,19 @@ export class EthersService implements OnDestroy {
     {
       inputs: [
         {
+          internalType: 'bytes',
+          name: 'signature',
+          type: 'bytes',
+        },
+      ],
+      name: 'acknowledgeVersion',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
           internalType: 'int256',
           name: '_num1',
           type: 'int256',
@@ -720,34 +733,38 @@ export class EthersService implements OnDestroy {
     });
   }
 
-  // async callAcknowledgeVersion(): Promise<void> {
-  //   if (!this.proxyContract || !this.signer || !this.implementationContract) {
-  //     throw new Error(
-  //       'Proxy contract, Implementation contract or signer not initialized.'
-  //     );
-  //   }
+  async callAcknowledgeVersion(): Promise<void> {
+    if (!this.proxyContract || !this.signer || !this.implementationContract) {
+      throw new Error(
+        'Proxy contract, Implementation contract or signer not initialized.'
+      );
+    }
 
-  //   await this.handleAcknowledgment();
-  //   const userAddress = await this.signer!.getAddress();
-  //   const currentVersion = await this.proxyContract['getCurrentVersion']();
-
-  //   const message = {
-  //     user: userAddress,
-  //     newVersion: currentVersion,
-  //     message: 'This is a test, to check for selector clashes',
-  //   };
-
-  //   const signature = await this.signer.signTypedData(
-  //     this.domain,
-  //     this.types,
-  //     message
-  //   );
-
-  //   const tx = await this.implementationContract['acknowledgeVersion'](
-  //     signature
-  //   );
-  //   await tx.wait();
-  // }
+    try {
+      const input = 'Test';
+      const bytesInput = toUtf8Bytes(input);
+      const tx = await this.implementationContract['acknowledgeVersion'](
+        bytesInput
+      );
+      await tx.wait();
+    } catch (error) {
+      if (
+        this.isErrorWithMessage(error) &&
+        error.message.includes('ERROR_CODE_1')
+      ) {
+        await this.handleAcknowledgment();
+        const input = 'Test';
+        const bytesInput = toUtf8Bytes(input);
+        const tx = await this.implementationContract['acknowledgeVersion'](
+          bytesInput
+        );
+        await tx.wait();
+      } else {
+        console.error('Error during transaction:', error);
+        throw error;
+      }
+    }
+  }
 
   async callMethod(num1: number, num2: number, method: string): Promise<void> {
     if (!this.proxyContract || !this.signer || !this.implementationContract) {

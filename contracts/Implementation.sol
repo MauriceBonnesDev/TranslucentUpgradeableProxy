@@ -75,10 +75,10 @@ contract ImplementationV3 is ImplementationStorage {
     emit TotalValueChanged(_getTotalValue());
   }
 
-  // function acknowledgeVersion(bytes memory signature) public {
-  //   _setTotalValue(9999999999999999);
-  //   emit TotalValueChanged(_getTotalValue());
-  // }
+  function acknowledgeVersion(bytes memory signature) public {
+    _setTotalValue(9999999);
+    emit TotalValueChanged(_getTotalValue());
+  }
 
   function totalValue() public view returns (int256) {
     return _getTotalValue();

@@ -30,5 +30,5 @@ export type { ImplementationV3 } from "./contracts/Implementation.sol/Implementa
 export { ImplementationV3__factory } from "./factories/contracts/Implementation.sol/ImplementationV3__factory";
 export type { MyTransparentProxy } from "./contracts/MyTransparentProxy";
 export { MyTransparentProxy__factory } from "./factories/contracts/MyTransparentProxy__factory";
-export type { TranslucentUpgradeableProxyV2 } from "./contracts/TranslucentUpgradeableProxyV2";
-export { TranslucentUpgradeableProxyV2__factory } from "./factories/contracts/TranslucentUpgradeableProxyV2__factory";
+export type { TranslucentUpgradeableProxy } from "./contracts/TranslucentUpgradeableProxy";
+export { TranslucentUpgradeableProxy__factory } from "./factories/contracts/TranslucentUpgradeableProxy__factory";

@@ -24,11 +24,20 @@ import type {
 
 export interface ImplementationV3Interface extends Interface {
   getFunction(
-    nameOrSignature: "multiply" | "subtract" | "sum" | "totalValue"
+    nameOrSignature:
+      | "acknowledgeVersion"
+      | "multiply"
+      | "subtract"
+      | "sum"
+      | "totalValue"
   ): FunctionFragment;
 
   getEvent(nameOrSignatureOrTopic: "TotalValueChanged"): EventFragment;
 
+  encodeFunctionData(
+    functionFragment: "acknowledgeVersion",
+    values: [BytesLike]
+  ): string;
   encodeFunctionData(
     functionFragment: "multiply",
     values: [BigNumberish, BigNumberish]
@@ -46,6 +55,10 @@ export interface ImplementationV3Interface extends Interface {
     values?: undefined
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "acknowledgeVersion",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "multiply", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "subtract", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "sum", data: BytesLike): Result;
@@ -107,6 +120,12 @@ export interface ImplementationV3 extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  acknowledgeVersion: TypedContractMethod<
+    [signature: BytesLike],
+    [void],
+    "nonpayable"
+  >;
+
   multiply: TypedContractMethod<
     [_num1: BigNumberish, _num2: BigNumberish],
     [void],
@@ -131,6 +150,9 @@ export interface ImplementationV3 extends BaseContract {
     key: string | FunctionFragment
   ): T;
 
+  getFunction(
+    nameOrSignature: "acknowledgeVersion"
+  ): TypedContractMethod<[signature: BytesLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "multiply"
   ): TypedContractMethod<

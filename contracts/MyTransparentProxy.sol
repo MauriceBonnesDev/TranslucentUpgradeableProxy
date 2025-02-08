@@ -1,14 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
-import "@openzeppelin/contracts/proxy/Proxy.sol";
-// import "./TranslucentUpgradeableProxyV1.sol";
-import "./TranslucentUpgradeableProxyV2.sol";
+import "./TranslucentUpgradeableProxy.sol";
 import "./Implementation.sol";
 
 contract MyTransparentProxy is
-  Proxy,
-  TranslucentUpgradeableProxyV2,
+  TranslucentUpgradeableProxy,
   ImplementationStorage
 {
   constructor(
@@ -16,11 +13,11 @@ contract MyTransparentProxy is
     string memory name,
     string memory version,
     address owner
-  ) TranslucentUpgradeableProxyV2(name, version) Proxy() Ownable(owner) {
+  ) TranslucentUpgradeableProxy(name, version, owner) Proxy() {
     upgradeTo(initialImplementation);
   }
 
-  receive() external payable {}
+  // receive() external payable {}
 
   function getUserAcknowledgedVersion(
     address user
@@ -42,19 +39,15 @@ contract MyTransparentProxy is
     return _getCurrentVersion();
   }
 
-  function _implementation() internal view override returns (address) {
-    return _getVersionToImplementation(_getCurrentVersion());
-  }
-
-  function upgradeTo(address newImplementation) public override onlyOwner {
-    super.upgradeTo(newImplementation);
-  }
+  // function upgradeTo(address newImplementation) public override onlyOwner {
+  //   super.upgradeTo(newImplementation);
+  // }
 
   // function delegate(address implementation) public {
   //   _delegate(implementation);
   // }
 
-  fallback() external payable override notOwner requiresAcknowledgment {
-    _delegate(_implementation());
-  }
+  // fallback() external payable override notOwner requiresAcknowledgment {
+  //   _delegate(_implementation());
+  // }
 }

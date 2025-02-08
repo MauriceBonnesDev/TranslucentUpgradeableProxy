@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/mauricebonnes/dev/translucent-upgradeable-proxy/contracts/Implementation.sol": {
-      "lastModificationDate": 1736259309420,
-      "contentHash": "d48c704412a868933f7dfc244d16d8fa",
+      "lastModificationDate": 1737030013401,
+      "contentHash": "97acd3aeaaae73675af9224bc117af22",
       "sourceName": "contracts/Implementation.sol",
       "solcConfig": {
         "version": "0.8.28",
@@ -77,8 +77,8 @@
       ]
     },
     "/Users/mauricebonnes/dev/translucent-upgradeable-proxy/contracts/MyTransparentProxy.sol": {
-      "lastModificationDate": 1736259423956,
-      "contentHash": "e1fdfc6e2783876a3e68bedcddf3250c",
+      "lastModificationDate": 1737029303898,
+      "contentHash": "cc6dc1016da4b2a0f16bfc1d493a4c09",
       "sourceName": "contracts/MyTransparentProxy.sol",
       "solcConfig": {
         "version": "0.8.28",
@@ -105,8 +105,7 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/proxy/Proxy.sol",
-        "./TranslucentUpgradeableProxyV2.sol",
+        "./TranslucentUpgradeableProxy.sol",
         "./Implementation.sol"
       ],
       "versionPragmas": [
@@ -114,48 +113,6 @@
       ],
       "artifacts": [
         "MyTransparentProxy"
-      ]
-    },
-    "/Users/mauricebonnes/dev/translucent-upgradeable-proxy/contracts/TranslucentUpgradeableProxyV2.sol": {
-      "lastModificationDate": 1736843602436,
-      "contentHash": "d095c87dbbfa5ca666ce5ac39e21a18e",
-      "sourceName": "contracts/TranslucentUpgradeableProxyV2.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/access/Ownable.sol",
-        "@openzeppelin/contracts/utils/cryptography/EIP712.sol",
-        "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
-        "@openzeppelin/contracts/utils/Strings.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.28"
-      ],
-      "artifacts": [
-        "TranslucentUpgradeableProxyV2",
-        "TranslucentUpgradeableStorage"
       ]
     },
     "/Users/mauricebonnes/dev/translucent-upgradeable-proxy/node_modules/@openzeppelin/contracts/proxy/Proxy.sol": {
@@ -678,6 +635,49 @@
       ],
       "artifacts": [
         "Panic"
+      ]
+    },
+    "/Users/mauricebonnes/dev/translucent-upgradeable-proxy/contracts/TranslucentUpgradeableProxy.sol": {
+      "lastModificationDate": 1737029626874,
+      "contentHash": "58acc4df42c44a92aeb0e03cfd9324b6",
+      "sourceName": "contracts/TranslucentUpgradeableProxy.sol",
+      "solcConfig": {
+        "version": "0.8.28",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/proxy/Proxy.sol",
+        "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
+        "@openzeppelin/contracts/utils/cryptography/EIP712.sol",
+        "@openzeppelin/contracts/utils/Strings.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.28"
+      ],
+      "artifacts": [
+        "TranslucentUpgradeableProxy",
+        "TranslucentUpgradeableStorage"
       ]
     }
   }

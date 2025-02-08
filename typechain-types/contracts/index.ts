@@ -4,4 +4,4 @@
 import type * as implementationSol from "./Implementation.sol";
 export type { implementationSol };
 export type { MyTransparentProxy } from "./MyTransparentProxy";
-export type { TranslucentUpgradeableProxyV2 } from "./TranslucentUpgradeableProxyV2";
+export type { TranslucentUpgradeableProxy } from "./TranslucentUpgradeableProxy";

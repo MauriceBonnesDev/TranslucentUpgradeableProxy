@@ -3,4 +3,4 @@
 /* eslint-disable */
 export * as implementationSol from "./Implementation.sol";
 export { MyTransparentProxy__factory } from "./MyTransparentProxy__factory";
-export { TranslucentUpgradeableProxyV2__factory } from "./TranslucentUpgradeableProxyV2__factory";
+export { TranslucentUpgradeableProxy__factory } from "./TranslucentUpgradeableProxy__factory";

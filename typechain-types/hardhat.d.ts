@@ -62,9 +62,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MyTransparentProxy__factory>;
     getContractFactory(
-      name: "TranslucentUpgradeableProxyV2",
+      name: "TranslucentUpgradeableProxy",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.TranslucentUpgradeableProxyV2__factory>;
+    ): Promise<Contracts.TranslucentUpgradeableProxy__factory>;
 
     getContractAt(
       name: "Ownable",
@@ -127,10 +127,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.MyTransparentProxy>;
     getContractAt(
-      name: "TranslucentUpgradeableProxyV2",
+      name: "TranslucentUpgradeableProxy",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
-    ): Promise<Contracts.TranslucentUpgradeableProxyV2>;
+    ): Promise<Contracts.TranslucentUpgradeableProxy>;
 
     deployContract(
       name: "Ownable",
@@ -181,9 +181,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MyTransparentProxy>;
     deployContract(
-      name: "TranslucentUpgradeableProxyV2",
+      name: "TranslucentUpgradeableProxy",
       signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.TranslucentUpgradeableProxyV2>;
+    ): Promise<Contracts.TranslucentUpgradeableProxy>;
 
     deployContract(
       name: "Ownable",
@@ -246,10 +246,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MyTransparentProxy>;
     deployContract(
-      name: "TranslucentUpgradeableProxyV2",
+      name: "TranslucentUpgradeableProxy",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.TranslucentUpgradeableProxyV2>;
+    ): Promise<Contracts.TranslucentUpgradeableProxy>;
 
     // default types
     getContractFactory(

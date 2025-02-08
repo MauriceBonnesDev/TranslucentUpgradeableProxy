@@ -162,4 +162,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       throw error;
     }
   }
+
+  async callSelectorClash() {
+    try {
+      await this.ethersService.callAcknowledgeVersion();
+      this.status = 'Transaction successful!';
+    } catch (error) {
+      throw error;
+    }
+  }
 }

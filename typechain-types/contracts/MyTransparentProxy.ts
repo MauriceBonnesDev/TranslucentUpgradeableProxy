@@ -27,7 +27,6 @@ export interface MyTransparentProxyInterface extends Interface {
   getFunction(
     nameOrSignature:
       | "acknowledgeVersion"
-      | "delegate"
       | "eip712Domain"
       | "getCurrentVersion"
       | "getUserAcknowledgedVersion"
@@ -50,10 +49,6 @@ export interface MyTransparentProxyInterface extends Interface {
   encodeFunctionData(
     functionFragment: "acknowledgeVersion",
     values: [BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "delegate",
-    values: [AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "eip712Domain",
@@ -93,7 +88,6 @@ export interface MyTransparentProxyInterface extends Interface {
     functionFragment: "acknowledgeVersion",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "delegate", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "eip712Domain",
     data: BytesLike
@@ -227,12 +221,6 @@ export interface MyTransparentProxy extends BaseContract {
     "nonpayable"
   >;
 
-  delegate: TypedContractMethod<
-    [implementation: AddressLike],
-    [void],
-    "nonpayable"
-  >;
-
   eip712Domain: TypedContractMethod<
     [],
     [
@@ -288,9 +276,6 @@ export interface MyTransparentProxy extends BaseContract {
   getFunction(
     nameOrSignature: "acknowledgeVersion"
   ): TypedContractMethod<[signature: BytesLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "delegate"
-  ): TypedContractMethod<[implementation: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "eip712Domain"
   ): TypedContractMethod<
