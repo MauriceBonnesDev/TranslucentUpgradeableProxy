@@ -36,6 +36,9 @@ npm install
 npm run start
 ```
 
+2. #### Open Chrome
+   Visit `localhost:4200` in Google Chrome.
+
 ## Start application in Hardhat
 
 1. #### Start new terminal window in project directory
@@ -55,6 +58,15 @@ This terminal window must remain open permanently, otherwise the blockchain will
 ```bash
 npx hardhat ignition deploy ./ignition/modules/Proxy.ts --network localhost
 ```
+
+## Navigating the application
+
+- When changing the wallet, please press on the Connect Button in the top right corner.
+- Disconnecting a wallet works, when pressing the connect button a second time, while the same
+  wallet is still selected in MetaMask.
+- Calling into the selector clash, is only possible after interacting with the contract before, because
+  the acknowledgement is required for this. This function only shows, that selector clashes can be handled.
+  The functionality for calling into a selector clash is only possible in ImplementationV3.
 
 ## Additional Information
 

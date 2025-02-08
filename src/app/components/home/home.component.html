@@ -106,6 +106,10 @@
       </div>
 
       <button
+        *ngIf="
+          currentImplementationAddress ===
+          ImplementationContractAddress.ImplementationV3
+        "
         class="flex-auto text-5xl w-full h-[120px] bg-yellow-500 rounded-lg"
         (click)="callSelectorClash()"
       >
