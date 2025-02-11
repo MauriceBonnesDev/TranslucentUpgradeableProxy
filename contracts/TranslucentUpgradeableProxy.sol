@@ -135,7 +135,7 @@ abstract contract TranslucentUpgradeableProxy is
   function _getMessage() internal view returns (string memory) {
     string memory userAcknowledgedContractEtherscan = string(
       abi.encodePacked(
-        "(https://etherscan.io/address/0x",
+        "(https://sepolia.etherscan.io/address/0x",
         bytesToHex(
           abi.encodePacked(
             _getVersionToImplementation(userAcknowledgedVersion[msg.sender])
@@ -146,7 +146,7 @@ abstract contract TranslucentUpgradeableProxy is
     );
     string memory currentContractEtherscan = string(
       abi.encodePacked(
-        "(https://etherscan.io/address/0x",
+        "(https://sepolia.etherscan.io/address/0x",
         bytesToHex(
           abi.encodePacked(_getVersionToImplementation(_getCurrentVersion()))
         ),

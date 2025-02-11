@@ -13,7 +13,7 @@ Tested only in Google Chrome. Please use Google Chrome!
 1. #### Clone the repository:
 
 ```bash
-git clone https://github.com/MauriceBonnesDev/average-game
+git clone https://github.com/MauriceBonnesDev/TranslucentUpgradeableProxy
 ```
 
 2. #### Change to the project directory:
@@ -28,36 +28,113 @@ cd /path/to/repository
 npm install
 ```
 
-## Starting the application
+## Additional Information
+
+The application can be deployed locally in hardhat, aswell as on the sepolia testnet with the following steps.
+I provided the private key to a test wallet, that serves as the owner of the already deployed smart contracts.
+`91bdcd57bc7bb18114c37b781bfb16ea2b3aee55d075e2d7229620c00de753ce` please [import](#import-account-into-metamask) this wallet in MetaMask if you
+want to interact with the already deployed Smart Contracts. This wallet
+is also funded with some SepoliaETH to test the interactions.
+
+If you want to use your own wallet, you can do so, but you'd have to change the private key provided in the `hardhat.config.ts` in line `21` to your own private key. Make sure this is only a TEST ACCOUNT.
+
+You can also deploy the smart contracts again ([Start application on Sepolia (deploy on your own)](#start-application-on-sepolia-deploy-on-your-own)). Below is also a list of [hardhat accounts](#hardhat-accounts) you can [import](#import-account-into-metamask)
+
+## Starting the frontend
 
 1. #### Starting the frontend:
 
-```bash
-npm run start
-```
+   ```bash
+   npm run start
+   ```
 
-2. #### Open Chrome
+2. #### Open Google Chrome
    Visit `localhost:4200` in Google Chrome.
+
+## Start application on Sepolia (interact with deployed contracts)
+
+1. #### Change chainID to sepolia
+
+   In the `ethers.service.ts` file in line `42` change the chainID to `11155111` for sepolia testnet
+
+2. #### Change Implementation Addresses in home.component.ts
+
+   Change the ImplementationV1, ImplementationV2 and ImplementationV3 Address in line `15-19` inside the `home.component.ts`:
+   `ImplementationV1 = '0x43D0a9681B188AAf4DFA40326992796748794EBc'`,
+   `ImplementationV2 = '0x5778Bf7115Bd414C42ec1b50Bce6909E094d15CC'`,
+   `ImplementationV3 = '0x1E33334373A46d972e05Cd004422125839Ed315A'`
+
+3. #### Change the Proxy Address in ethers.service.ts
+
+   In the `ethers.service.ts` file in line `22` change the `proxyAddress` to `'0x1021884B1D0edb3Be0A963cf94eb89bE20f01a1C'`
+
+4. #### (Optional) Change Network to Sepolia in MetaMask
+   For detailed steps, check out [Importing](#import-account-into-metamask) and [Changing Network](#changing-network-in-metamask)
+
+## Start application on Sepolia (deploy on your own)
+
+1. #### Change chainID to sepolia
+
+   In the `ethers.service.ts` file in line `42` change the chainID to `11155111` for sepolia testnet
+
+2. #### Change Implementation Addresses in home.component.ts
+
+   Change the ImplementationV1, ImplementationV2 and ImplementationV3 Address in line `15-19` inside the `home.component.ts` to the deployed addresses in your terminal window
+
+3. #### Remove deployments for chain-11155111 (can't interact with previously deployed version anymore)
+
+   Delete the `chain-11155111` folder inside `ignition/deployments/`
+
+4. #### Deploy smart contracts on sepolia (repeat if nonce issue appears (scroll down to IGN405 Error while deploying))
+
+   ```bash
+   npx hardhat ignition deploy ./ignition/modules/Proxy.ts --network sepolia
+   ```
+
+5. #### Change the Proxy Address in ethers.service.ts
+
+   In the `ethers.service.ts` file in line `22` change the `proxyAddress` to the one displayed in your terminal window
+
+6. #### (Optional) Change Network to Sepolia in MetaMask
+   For detailed steps, check out [Importing](#import-account-into-metamask) and [Changing Network](#changing-network-in-metamask)
 
 ## Start application in Hardhat
 
-1. #### Start new terminal window in project directory
+1. #### Change chainID to hardhat
 
-2. #### Start local blockchain
+   In the `ethers.service.ts` file in line `42` change the chainID to `31337` for hardhat local chain network
 
-```bash
-npx hardhat node
-```
+2. #### Start new terminal window in project directory
+
+3. #### Change Implementation Addresses in home.component.ts
+
+   Change the ImplementationV1, ImplementationV2 and ImplementationV3 Address in line `15-19`inside the `home.component.ts`:
+   `ImplementationV1 = '0x5FbDB2315678afecb367f032d93F642f64180aa3'`,
+   `ImplementationV2 = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'`,
+   `ImplementationV3 = '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0'`
+
+4. #### Change the Proxy Address in ethers.service.ts
+
+   In the `ethers.service.ts` file in line `22` change the `proxyAddress` to `'0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9'`
+
+5. #### Start local blockchain
+
+   ```bash
+   npx hardhat node
+   ```
 
 This terminal window must remain open permanently, otherwise the blockchain will no longer run.
 
-3. #### Start new terminal window in project directory
+6. #### Start new terminal window in project directory
 
-4. #### Deploy smart contracts locally (blockchain must run locally (step 3))
+7. #### Deploy smart contracts locally (blockchain must run locally (step 5))
 
-```bash
-npx hardhat ignition deploy ./ignition/modules/Proxy.ts --network localhost
-```
+   ```bash
+   npx hardhat ignition deploy ./ignition/modules/Proxy.ts --network localhost
+   ```
+
+8. #### (Optional) Change Network to Hardhat in MetaMask
+   For detailed steps, check out [Importing](#import-account-into-metamask) and [Changing Network](#changing-network-in-metamask)
 
 ## Navigating the application
 
@@ -67,67 +144,48 @@ npx hardhat ignition deploy ./ignition/modules/Proxy.ts --network localhost
 - Calling into the selector clash, is only possible after interacting with the contract before, because
   the acknowledgement is required for this. This function only shows, that selector clashes can be handled.
   The functionality for calling into a selector clash is only possible in ImplementationV3.
+- Account 0 is always the owner in Hardhat. The owner is only able to upgrade the implementation contracts, not interact with them.
+- Other accounts are able to interact with the implementation contracts through the proxy.
+- On first interaction with a new version, the account has to provide an EIP-712 signature
+  to acknowledge the upgrade, instead of blindly interacting with a different smart contract.
 
-## Additional Information
+## Importing Network in MetaMask
 
-Account 0 is always the owner (able to upgrade the implementation contract)
-Other accounts are able to interact with the implementation contracts through the proxy.
-On first interaction with a new version, the account has to provide an EIP-712 signature
-to acknowledge the upgrade, instead of blindly interacting with a different smart contract.
+1. Open MetaMask
+   ![Open Metamask](images/OpenMetamask.png)
+2. Click on Network
+   ![Select Network](images/SelectNetwork.png)
+3. Add Custom Network
+   ![Add a Custom Network](images/AddCustomNetwork.png)
+4. (Optional) Create API-KEY for infura
+   Follow steps on infura.io
+5. Insert the following values (Sepolia and Hardhat):
+   **Network name**: Sepolia
+   **Default RPC URL**: https://sepolia.infura.io/v3/<YOUR-API-KEY\>
+   **Chain ID**: 11155111
+   **Currency Symbol**: SepoliaETH
+   **Block explorer URL**: https://sepolia.etherscan.io<br><br>
 
-## Problems in Hardhat
+   **Network name**: Hardhat
+   **Default RPC URL**: http://127.0.0.1:8545/
+   **Chain ID**: 31337
+   **Currency Symbol**: HardhatETH
+   ![Insert Custom Network Values](images/InsertCustomNetworkValues.png)
 
-1. #### Invalid Block Tag
+## Changing Network in MetaMask
 
-If a problem occurs and a message similar to this appears in the blockchain terminal window:
+1. Open MetaMask
+   ![Open Metamask](images/OpenMetamask.png)
+2. Click on Network
+   ![Select Network](images/SelectNetwork.png)
+3. Select desired Network
 
-`Received invalid block tag xx. Latest block number is zz`
+## Test Account
 
-All connected wallets should then delete the activity data, then disconnect and then restart the browser. This can happen because Metamask caches a different version of the blockchain, which is then reset.
+**Owner**: 0x331e0f477Be71d74228469a3fEF83C50B2Fd9f36
+**Private Key**: 91bdcd57bc7bb18114c37b781bfb16ea2b3aee55d075e2d7229620c00de753ce
 
-The following error then appears in the Chrome Developer Tools:
-
-![Errormessage](images/Error.png)
-
-2. #### Transaction nonce not synchronized
-
-If the local blockchain is used, Metamask may have a problem with the transaction nonces not being synchronized with the local blockchain. To do this, it is necessary to delete the activity data before a transaction is carried out.
-
-#### Clear activity data in Metamask
-
-1. #### Open Metamask
-
-   ![Open Metamask](images/OpenMetamask.jpeg)
-
-2. #### Click three dots
-
-   ![Click three dots](images/ThreeDots.png)
-
-3. #### Open Settings
-
-   ![Open Settings](images/OpenSettings.png)
-
-4. #### Open Advanced Settings
-
-   ![Open advanced settings](images/Advanced.png)
-
-5. #### Click Clear activity tab data
-   ![Clear activity tab data](images/ClearActivity.png)
-
-These steps must be performed for all wallets that have already signed a transaction.
-
-#### Import account into Hardhat
-
-1. Open Metamask
-   ![Open Metamask](images/OpenMetamask.jpeg)
-2. Click on account
-   ![Click on account](images/selectAccount.png)
-3. Click Add account or hardware wallet
-   ![Click on Add account or hardware wallet](images/addAccount.png)
-4. Import account
-   ![Import account](images/importAccount.png)
-5. Insert and import private key
-   ![Insert private key and click import](images/enterPrivateKeyAndImport.png)
+## Hardhat Accounts
 
 **Account #0**: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 (10000 ETH)
 **Private Key**: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
@@ -144,47 +202,59 @@ These steps must be performed for all wallets that have already signed a transac
 **Account #4**: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65 (10000 ETH)
 **Private Key**: 0x47e179ec197488593b187f80a00eb0da91f1b9d0b13f8733639f19c30a34926a
 
-**Account #5**: 0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc (10000 ETH)
-**Private Key**: 0x8b3a350cf5c34c9194ca85829a2df0ec3153be0318b5e2d3348e872092edffba
+## Problems in Hardhat
 
-**Account #6**: 0x976EA74026E726554dB657fA54763abd0C3a0aa9 (10000 ETH)
-**Private Key**: 0x92db14e403b83dfe3df233f83dfa3a0d7096f21ca9b0d6d6b8d88b2b4ec1564e
+1.  #### IGN405 Error while deploying
 
-**Account #7**: 0x14dC79964da2C08b23698B3D3cc7Ca32193d9955 (10000 ETH)
-**Private Key**: 0x4bbbf85ce3377467afe5d46f804f221813b2bb87f24d81f60f1fcdbf7cbf4356
+    When deploying new smart contracts, this error might occur. This is a hardhat issue, as there are multiple transactions happening while deploying.
+    ![IGN405 Nonce Error](images/IGN405_1.png)
 
-**Account #8**: 0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f (10000 ETH)
-**Private Key**: 0xdbda1821b80551c9d65939329250298aa3472ba22feea921c0cf5d620ea67b97
+    Retry deploying, you will see a slight change in the message, stating `Resuming existing deployment from ./ignition/deployments/chain-11155111`
+    ![Retry Deployment](images/IGN405_2.png)
 
-**Account #9**: 0xa0Ee7A142d267C1f36714E4a8F75612F20a79720 (10000 ETH)
-**Private Key**: 0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
+    Retry until the deployment is successful
+    ![Successful deployment](images/IGN405_3.png)
 
-**Account #10**: 0xBcd4042DE499D14e55001CcbB24a551F3b954096 (10000 ETH)
-**Private Key**: 0xf214f2b2cd398c806f84e317254e0f0b801d0643303237d97a22a48e01628897
+2.  #### Invalid Block Tag
 
-**Account #11**: 0x71bE63f3384f5fb98995898A86B02Fb2426c5788 (10000 ETH)
-**Private Key**: 0x701b615bbdfb9de65240bc28bd21bbc0d996645a3dd57e7b12bc2bdf6f192c82
+    If a problem occurs and a message similar to this appears in the blockchain terminal window:
 
-**Account #12**: 0xFABB0ac9d68B0B445fB7357272Ff202C5651694a (10000 ETH)
-**Private Key**: 0xa267530f49f8280200edf313ee7af6b827f2a8bce2897751d06a843f644967b1
+    `Received invalid block tag xx. Latest block number is zz`
 
-**Account #13**: 0x1CBd3b2770909D4e10f157cABC84C7264073C9Ec (10000 ETH)
-**Private Key**: 0x47c99abed3324a2707c28affff1267e45918ec8c3f20b8aa892e8b065d2942dd
+    All connected wallets should then delete the activity data, then disconnect and then restart the browser. This can happen because Metamask caches a different version of the blockchain, which is then reset.
 
-**Account #14**: 0xdF3e18d64BC6A983f673Ab319CCaE4f1a57C7097 (10000 ETH)
-**Private Key**: 0xc526ee95bf44d8fc405a158bb884d9d1238d99f0612e9f33d006bb0789009aaa
+    The following error then appears in the Chrome Developer Tools:
 
-**Account #15**: 0xcd3B766CCDd6AE721141F452C550Ca635964ce71 (10000 ETH)
-**Private Key**: 0x8166f546bab6da521a8369cab06c5d2b9e46670292d85c875ee9ec20e84ffb61
+    ![Errormessage](images/Error.png)
 
-**Account #16**: 0x2546BcD3c84621e976D8185a91A922aE77ECEc30 (10000 ETH)
-**Private Key**: 0xea6c44ac03bff858b476bba40716402b03e41b8e97e276d1baec7c37d42484a0
+3.  #### Transaction nonce not synchronized
 
-**Account #17**: 0xbDA5747bFD65F08deb54cb465eB87D40e51B197E (10000 ETH)
-**Private Key**: 0x689af8efa8c651a91ad287602527f3af2fe9f6501a7ac4b061667b5a93e037fd
+    If the local blockchain is used, Metamask may have a problem with the transaction nonces not being synchronized with the local blockchain. To do this, it is necessary to delete the activity data before a transaction is carried out.
 
-**Account #18**: 0xdD2FD4581271e230360230F9337D5c0430Bf44C0 (10000 ETH)
-**Private Key**: 0xde9be858da4a475276426320d5e9262ecfc3ba460bfac56360bfa6c4c28b4ee0
+#### Clear activity data in Metamask
 
-**Account #19**: 0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199 (10000 ETH)
-**Private Key**: 0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf23656e
+1. Open Metamask
+   ![Open Metamask](images/OpenMetamask.png)
+2. Click three dots
+   ![Click three dots](images/ThreeDots.png)
+3. Open Settings
+   ![Open Settings](images/OpenSettings.png)
+4. Open Advanced Settings
+   ![Open advanced settings](images/Advanced.png)
+5. Click Clear activity tab data
+   ![Clear activity tab data](images/ClearActivity.png)
+
+These steps must be performed for all wallets that have already signed a transaction.
+
+#### Import account into Metamask
+
+1. Open Metamask
+   ![Open Metamask](images/OpenMetamask.png)
+2. Click on account
+   ![Click on account](images/selectAccount.png)
+3. Click Add account or hardware wallet
+   ![Click on Add account or hardware wallet](images/addAccount.png)
+4. Import account
+   ![Import account](images/importAccount.png)
+5. Insert and import private key
+   ![Insert private key and click import](images/enterPrivateKeyAndImport.png)

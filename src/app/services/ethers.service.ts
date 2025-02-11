@@ -18,8 +18,8 @@ export class EthersService implements OnDestroy {
   private signer: Signer | null = null;
   private proxyContract: Contract | null = null;
   private implementationContract: Contract | null = null;
-
-  private proxyAddress = '0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9';
+  // Sepolia: 0x1021884B1D0edb3Be0A963cf94eb89bE20f01a1C, Hardhat: 0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9
+  private proxyAddress = '0x1021884B1D0edb3Be0A963cf94eb89bE20f01a1C';
 
   private connectedWalletAddressSubject = new BehaviorSubject<string>('');
   public connectedWalletAddress$ =
@@ -38,7 +38,8 @@ export class EthersService implements OnDestroy {
   private domain = {
     name: 'TranslucentUpgradeableProxy',
     version: '1.0.0',
-    chainId: 31337, // Sepolia ChainID: 11155111 Hardhat ChainID: 31337
+    // Sepolia ChainID: 11155111 Hardhat ChainID: 31337
+    chainId: 11155111,
     verifyingContract: this.proxyAddress,
   };
 
@@ -821,7 +822,7 @@ export class EthersService implements OnDestroy {
     const message = {
       user: userAddress,
       newVersion: currentVersion,
-      message: `You are currently on version ${userAcknowledgedVersion} (https://etherscan.io/address/${acknowledgedAddress}#code). The newest version is version ${currentVersion} (https://etherscan.io/address/${currentImplementationAddress}#code). Please sign this message to confirm the upgrade.`,
+      message: `You are currently on version ${userAcknowledgedVersion} (https://sepolia.etherscan.io/address/${acknowledgedAddress}#code). The newest version is version ${currentVersion} (https://sepolia.etherscan.io/address/${currentImplementationAddress}#code). Please sign this message to confirm the upgrade.`,
     };
 
     const signature = await this.signer.signTypedData(
