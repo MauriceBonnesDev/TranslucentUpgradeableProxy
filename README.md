@@ -59,9 +59,9 @@ You can also deploy the smart contracts again ([Start application on Sepolia (de
 
 2. #### Change Implementation Addresses in home.component.ts
 
-   Change the ImplementationV1, ImplementationV2 and ImplementationV3 Address in line `15-19` inside the `home.component.ts`:
-   `ImplementationV1 = '0x43D0a9681B188AAf4DFA40326992796748794EBc'`,
-   `ImplementationV2 = '0x5778Bf7115Bd414C42ec1b50Bce6909E094d15CC'`,
+   Change the ImplementationV1, ImplementationV2 and ImplementationV3 Address in line `15-19` inside the `home.component.ts`:<br>
+   `ImplementationV1 = '0x43D0a9681B188AAf4DFA40326992796748794EBc'`,<br>
+   `ImplementationV2 = '0x5778Bf7115Bd414C42ec1b50Bce6909E094d15CC'`,<br>
    `ImplementationV3 = '0x1E33334373A46d972e05Cd004422125839Ed315A'`
 
 3. #### Change the Admin Address in home.component.ts
@@ -114,9 +114,9 @@ You can also deploy the smart contracts again ([Start application on Sepolia (de
 
 2. #### Change Implementation Addresses in home.component.ts
 
-   Change the ImplementationV1, ImplementationV2 and ImplementationV3 Address in line `15-19`inside the `home.component.ts`:
-   `ImplementationV1 = '0x5FbDB2315678afecb367f032d93F642f64180aa3'`,
-   `ImplementationV2 = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'`,
+   Change the ImplementationV1, ImplementationV2 and ImplementationV3 Address in line `15-19`inside the `home.component.ts`:<br>
+   `ImplementationV1 = '0x5FbDB2315678afecb367f032d93F642f64180aa3'`,<br>
+   `ImplementationV2 = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'`,<br>
    `ImplementationV3 = '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0'`
 
 3. #### Change the Admin Address in home.component.ts
