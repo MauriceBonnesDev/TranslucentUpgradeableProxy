@@ -164,7 +164,7 @@ You can also deploy the smart contracts again ([Start application on Sepolia (de
 ## Importing Network in MetaMask
 
 1. Open MetaMask
-   ![Open Metamask](images/OpenMetamask.png)
+   ![Open Metamask](images/OpenMetaMask.png)
 2. Click on Network
    ![Select Network](images/SelectNetwork.png)
 3. Add Custom Network
@@ -187,7 +187,7 @@ You can also deploy the smart contracts again ([Start application on Sepolia (de
 ## Changing Network in MetaMask
 
 1. Open MetaMask
-   ![Open Metamask](images/OpenMetamask.png)
+   ![Open Metamask](images/OpenMetaMask.png)
 2. Click on Network
    ![Select Network](images/SelectNetwork.png)
 3. Select desired Network
@@ -246,7 +246,7 @@ You can also deploy the smart contracts again ([Start application on Sepolia (de
 #### Clear activity data in Metamask
 
 1. Open Metamask
-   ![Open Metamask](images/OpenMetamask.png)
+   ![Open Metamask](images/OpenMetaMask.png)
 2. Click three dots
    ![Click three dots](images/ThreeDots.png)
 3. Open Settings
@@ -261,7 +261,7 @@ These steps must be performed for all wallets that have already signed a transac
 #### Import account into Metamask
 
 1. Open Metamask
-   ![Open Metamask](images/OpenMetamask.png)
+   ![Open Metamask](images/OpenMetaMask.png)
 2. Click on account
    ![Click on account](images/selectAccount.png)
 3. Click Add account or hardware wallet
