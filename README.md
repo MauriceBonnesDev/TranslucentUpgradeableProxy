@@ -146,6 +146,7 @@ You can also deploy the smart contracts again ([Start application on Sepolia (de
    ```
 
 9. #### (Optional) Change Network to Hardhat in MetaMask
+
    For detailed steps, check out [Importing](#import-account-into-metamask) and [Changing Network](#changing-network-in-metamask)
 
 ## Navigating the application
@@ -163,32 +164,32 @@ You can also deploy the smart contracts again ([Start application on Sepolia (de
 
 ## Importing Network in MetaMask
 
-1. Open MetaMask
+1. Open MetaMask<br>
    ![Open Metamask](images/OpenMetaMask.png)
-2. Click on Network
+2. Click on Network<br>
    ![Select Network](images/SelectNetwork.png)
-3. Add Custom Network
+3. Add Custom Network<br>
    ![Add a Custom Network](images/AddCustomNetwork.png)
-4. (Optional) Create API-KEY for infura
+4. (Optional) Create API-KEY for infura<br>
    Follow steps on infura.io
-5. Insert the following values (Sepolia and Hardhat):
-   **Network name**: Sepolia
-   **Default RPC URL**: https://sepolia.infura.io/v3/<YOUR-API-KEY\>
-   **Chain ID**: 11155111
-   **Currency Symbol**: SepoliaETH
+5. Insert the following values (Sepolia and Hardhat):<br>
+   **Network name**: Sepolia<br>
+   **Default RPC URL**: https://sepolia.infura.io/v3/<YOUR-API-KEY\><br>
+   **Chain ID**: 11155111<br>
+   **Currency Symbol**: SepoliaETH<br>
    **Block explorer URL**: https://sepolia.etherscan.io<br><br>
 
-   **Network name**: Hardhat
-   **Default RPC URL**: http://127.0.0.1:8545/
-   **Chain ID**: 31337
-   **Currency Symbol**: HardhatETH
+   **Network name**: Hardhat<br>
+   **Default RPC URL**: http://127.0.0.1:8545/<br>
+   **Chain ID**: 31337<br>
+   **Currency Symbol**: HardhatETH<br>
    ![Insert Custom Network Values](images/InsertCustomNetworkValues.png)
 
 ## Changing Network in MetaMask
 
-1. Open MetaMask
+1. Open MetaMask<br>
    ![Open Metamask](images/OpenMetaMask.png)
-2. Click on Network
+2. Click on Network<br>
    ![Select Network](images/SelectNetwork.png)
 3. Select desired Network
 
@@ -245,28 +246,28 @@ You can also deploy the smart contracts again ([Start application on Sepolia (de
 
 #### Clear activity data in Metamask
 
-1. Open Metamask
+1. Open Metamask<br>
    ![Open Metamask](images/OpenMetaMask.png)
-2. Click three dots
+2. Click three dots<br>
    ![Click three dots](images/ThreeDots.png)
-3. Open Settings
+3. Open Settings<br>
    ![Open Settings](images/OpenSettings.png)
-4. Open Advanced Settings
+4. Open Advanced Settings<br>
    ![Open advanced settings](images/Advanced.png)
-5. Click Clear activity tab data
+5. Click Clear activity tab data<br>
    ![Clear activity tab data](images/ClearActivity.png)
 
 These steps must be performed for all wallets that have already signed a transaction.
 
 #### Import account into Metamask
 
-1. Open Metamask
+1. Open Metamask<br>
    ![Open Metamask](images/OpenMetaMask.png)
-2. Click on account
+2. Click on account<br>
    ![Click on account](images/selectAccount.png)
-3. Click Add account or hardware wallet
+3. Click Add account or hardware wallet<br>
    ![Click on Add account or hardware wallet](images/addAccount.png)
-4. Import account
+4. Import account<br>
    ![Import account](images/importAccount.png)
-5. Insert and import private key
+5. Insert and import private key<br>
    ![Insert private key and click import](images/enterPrivateKeyAndImport.png)
