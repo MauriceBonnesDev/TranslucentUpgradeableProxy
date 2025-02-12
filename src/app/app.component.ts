@@ -8,8 +8,6 @@ import { EthersService } from './services/ethers.service';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'Translucent Upgradeable Proxy';
-
   userAddress: string | null = null;
 
   constructor(private ethersService: EthersService) {

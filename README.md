@@ -64,11 +64,15 @@ You can also deploy the smart contracts again ([Start application on Sepolia (de
    `ImplementationV2 = '0x5778Bf7115Bd414C42ec1b50Bce6909E094d15CC'`,
    `ImplementationV3 = '0x1E33334373A46d972e05Cd004422125839Ed315A'`
 
-3. #### Change the Proxy Address in ethers.service.ts
+3. #### Change the Admin Address in home.component.ts
+
+   In the `home.component.ts` file in line `95` change the `address` string to `'0x331e0f477Be71d74228469a3fEF83C50B2Fd9f36'`
+
+4. #### Change the Proxy Address in ethers.service.ts
 
    In the `ethers.service.ts` file in line `22` change the `proxyAddress` to `'0x1021884B1D0edb3Be0A963cf94eb89bE20f01a1C'`
 
-4. #### (Optional) Change Network to Sepolia in MetaMask
+5. #### (Optional) Change Network to Sepolia in MetaMask
    For detailed steps, check out [Importing](#import-account-into-metamask) and [Changing Network](#changing-network-in-metamask)
 
 ## Start application on Sepolia (deploy on your own)
@@ -81,21 +85,25 @@ You can also deploy the smart contracts again ([Start application on Sepolia (de
 
    Change the ImplementationV1, ImplementationV2 and ImplementationV3 Address in line `15-19` inside the `home.component.ts` to the deployed addresses in your terminal window
 
-3. #### Remove deployments for chain-11155111 (can't interact with previously deployed version anymore)
+3. #### Change the Admin Address in home.component.ts
+
+   In the `home.component.ts` file in line `95` change the `address` string to your own admin address
+
+4. #### Change the Proxy Address in ethers.service.ts
+
+   In the `ethers.service.ts` file in line `22` change the `proxyAddress` to the one displayed in your terminal window
+
+5. #### Remove deployments for chain-11155111 (can't interact with previously deployed version anymore)
 
    Delete the `chain-11155111` folder inside `ignition/deployments/`
 
-4. #### Deploy smart contracts on sepolia (repeat if nonce issue appears (scroll down to IGN405 Error while deploying))
+6. #### Deploy smart contracts on sepolia (repeat if [nonce issue](#ign405-error-while-deploying) appears)
 
    ```bash
    npx hardhat ignition deploy ./ignition/modules/Proxy.ts --network sepolia
    ```
 
-5. #### Change the Proxy Address in ethers.service.ts
-
-   In the `ethers.service.ts` file in line `22` change the `proxyAddress` to the one displayed in your terminal window
-
-6. #### (Optional) Change Network to Sepolia in MetaMask
+7. #### (Optional) Change Network to Sepolia in MetaMask
    For detailed steps, check out [Importing](#import-account-into-metamask) and [Changing Network](#changing-network-in-metamask)
 
 ## Start application in Hardhat
@@ -104,36 +112,40 @@ You can also deploy the smart contracts again ([Start application on Sepolia (de
 
    In the `ethers.service.ts` file in line `42` change the chainID to `31337` for hardhat local chain network
 
-2. #### Start new terminal window in project directory
-
-3. #### Change Implementation Addresses in home.component.ts
+2. #### Change Implementation Addresses in home.component.ts
 
    Change the ImplementationV1, ImplementationV2 and ImplementationV3 Address in line `15-19`inside the `home.component.ts`:
    `ImplementationV1 = '0x5FbDB2315678afecb367f032d93F642f64180aa3'`,
    `ImplementationV2 = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'`,
    `ImplementationV3 = '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0'`
 
+3. #### Change the Admin Address in home.component.ts
+
+   In the `home.component.ts` file in line `95` change the `address` string to `'0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'`
+
 4. #### Change the Proxy Address in ethers.service.ts
 
    In the `ethers.service.ts` file in line `22` change the `proxyAddress` to `'0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9'`
 
-5. #### Start local blockchain
+5. #### Start new terminal window in project directory
+
+6. #### Start local blockchain
 
    ```bash
    npx hardhat node
    ```
 
-This terminal window must remain open permanently, otherwise the blockchain will no longer run.
+   This terminal window must remain open permanently, otherwise the blockchain will no longer run.
 
-6. #### Start new terminal window in project directory
+7. #### Start new terminal window in project directory
 
-7. #### Deploy smart contracts locally (blockchain must run locally (step 5))
+8. #### Deploy smart contracts locally (blockchain must run locally (step 5))
 
    ```bash
    npx hardhat ignition deploy ./ignition/modules/Proxy.ts --network localhost
    ```
 
-8. #### (Optional) Change Network to Hardhat in MetaMask
+9. #### (Optional) Change Network to Hardhat in MetaMask
    For detailed steps, check out [Importing](#import-account-into-metamask) and [Changing Network](#changing-network-in-metamask)
 
 ## Navigating the application

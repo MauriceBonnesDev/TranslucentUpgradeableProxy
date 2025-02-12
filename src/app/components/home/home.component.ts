@@ -59,7 +59,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   num2Sub: number = 0;
   totalValue?: number;
   title = 'Home Component';
-  status: string = 'Not connected';
   currentImplementationAddress: ImplementationContractAddress | null = null;
   private addressChangeSubscription?: Subscription;
   private totalValueChangeSubscription?: Subscription;
@@ -135,7 +134,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   async sum() {
     try {
       await this.ethersService.callMethod(this.num1Sum, this.num2Sum, 'sum');
-      this.status = 'Transaction successful!';
     } catch (error) {
       throw error;
     }
@@ -148,7 +146,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.num2Mul,
         'multiply'
       );
-      this.status = 'Transaction successful!';
     } catch (error) {
       throw error;
     }
@@ -161,7 +158,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.num2Sub,
         'subtract'
       );
-      this.status = 'Transaction successful!';
     } catch (error) {
       throw error;
     }
@@ -170,7 +166,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   async callSelectorClash() {
     try {
       await this.ethersService.callAcknowledgeVersion();
-      this.status = 'Transaction successful!';
     } catch (error) {
       throw error;
     }

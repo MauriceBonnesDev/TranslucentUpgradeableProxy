@@ -17,8 +17,6 @@ contract MyTransparentProxy is
     upgradeTo(initialImplementation);
   }
 
-  // receive() external payable {}
-
   function getUserAcknowledgedVersion(
     address user
   ) public view returns (uint256) {
@@ -38,16 +36,4 @@ contract MyTransparentProxy is
   function getCurrentVersion() public view returns (uint256) {
     return _getCurrentVersion();
   }
-
-  // function upgradeTo(address newImplementation) public override onlyOwner {
-  //   super.upgradeTo(newImplementation);
-  // }
-
-  // function delegate(address implementation) public {
-  //   _delegate(implementation);
-  // }
-
-  // fallback() external payable override notOwner requiresAcknowledgment {
-  //   _delegate(_implementation());
-  // }
 }
